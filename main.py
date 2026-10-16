@@ -8,9 +8,17 @@ st.title("🎯 SkillGap AI")
 st.caption("Detect skills before they become career problems.")
 st.write("Compare your current skills with a sample career skill profile and get a personalized learning roadmap.")
 
+career = st.selectbox("Choose your dream career", list(CAREERS))
+st.caption(f"Sample skills in this {career} checklist ({len(CAREERS[career])}):")
+st.write(", ".join(CAREERS[career]))
+
+with st.expander("Browse all career skill profiles"):
+    for career_name, required_skills in CAREERS.items():
+        st.markdown(f"**{career_name}**")
+        st.write(", ".join(required_skills))
+
 with st.form("student_profile"):
     name = st.text_input("Your name (optional)", max_chars=80)
-    career = st.selectbox("Choose your dream career", list(CAREERS))
     skills_raw = st.text_area("Your existing skills (comma-separated)", placeholder="Python, SQL, Git", height=100)
     submitted = st.form_submit_button("Analyze my skills", type="primary")
 
